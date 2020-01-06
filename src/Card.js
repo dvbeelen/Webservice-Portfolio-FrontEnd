@@ -13,16 +13,14 @@ export class Card extends React.Component {
     }
 
     async loadDetails(){
-        console.log(this.props.url)
         const response = await fetch(this.props.url)
         const json = await response.json()
-        console.log(json)
         this.setState({ projectName: json.projectName, summary: json.summary, clientName: json.clientName })
     }
     render() {
         return (
             <div className="card">
-                <div>{this.state.projectName}</div>
+                <div><b>{this.state.projectName}</b></div>
                 <div>
                     Summary: {this.state.summary} <br/>
                     Client: {this.state.clientName}

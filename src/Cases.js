@@ -15,8 +15,10 @@ export class Cases extends React.Component {
 
     async loadCases() {
         const response = await fetch(`http://145.24.222.215:8000/cases`)
+        if (!response){
+            console.log('API not responding.')
+        } 
         const json = await response.json()
-        console.log(json.items)
         this.setState({cases: json.items});
     } 
 

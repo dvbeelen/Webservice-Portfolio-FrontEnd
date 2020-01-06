@@ -4,7 +4,7 @@ export class Header extends React.Component{
     render() {
       return (
         <div>
-          <p>Header</p>
+          <h2>Portfolio</h2>
         </div>
       );
     }

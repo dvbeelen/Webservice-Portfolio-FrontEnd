@@ -4,7 +4,7 @@ export class Footer extends React.Component{
     render() {
       return (
         <div>
-          <p>Footer</p>
+          <p>Made by: Dion van Beelen</p>
         </div>
       );
     }
