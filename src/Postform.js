@@ -23,26 +23,29 @@ export default class Postform extends React.Component {
 
     let config = {
         headers: {
-            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json'
         }
       }
 
-    const formdata = {
+    let data = {
       projectName: this.state.projectName,
       clientName: this.state.clientName,
       summary: this.state.summary,
       description: this.state.description,
     };
 
-    var json = JSON.stringify(formdata);
+    var json = JSON.stringify(data);
     console.log(json)
 
-    axios.post(`http://145.24.222.215:8000/cases`, config, { json })
+    axios.post(`http://145.24.222.215:8000/cases`, json, config)
       .then(res => {
         console.log(res);
         console.log(res.data);
-        console.log('POST Succesful')
+        if (res.status !== 400){
+          console.log('POST Send.')
+        } else {
+          console.log('POST Not Send.')
+        }
       })
   }
 
