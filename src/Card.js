@@ -25,7 +25,12 @@ export class Card extends React.Component {
                     Summary: {this.state.summary} <br/>
                     Client: {this.state.clientName}
                 </div>
-                <div><button>Read more</button></div>
+                <div>
+                    <button>Read more</button>
+                    <button>Edit Case</button>
+                    <button>Delete Case</button>
+                </div>
+                
             </div>
         );
     }

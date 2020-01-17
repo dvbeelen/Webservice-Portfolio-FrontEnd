@@ -1,0 +1,82 @@
+import React from 'react';
+import axios from 'axios';
+
+export default class Postform extends React.Component {
+  state = {
+    projectName: '',
+    clientName: '',
+    summary: '',
+    description: '',
+  }
+
+  handleChange = event => {
+    this.setState({ 
+        projectName: event.target.value,
+        clientName: event.target.value,
+        summary: event.target.value,
+        description: event.target.value,
+    });
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    let config = {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+        }
+      }
+
+    const formdata = {
+      projectName: this.state.projectName,
+      clientName: this.state.clientName,
+      summary: this.state.summary,
+      description: this.state.description,
+    };
+
+    var json = JSON.stringify(formdata);
+    console.log(json)
+
+    axios.post(`http://145.24.222.215:8000/cases`, config, { json })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        console.log('POST Succesful')
+      })
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Project Name:
+            <input type="text" name="projectName" onChange={this.handleChange} />
+          </label>
+          <br></br>
+
+          <label>
+            Client Name:
+            <input type="text" name="clientName" onChange={this.handleChange} />
+          </label>
+          <br></br>
+
+          <label>
+            Summary:
+            <input type="text" name="summary" onChange={this.handleChange} />
+          </label>
+          <br></br>
+
+          <label>
+            Description:
+            <input type="text" name="description" onChange={this.handleChange} />
+          </label>
+          <br></br>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+    )
+  }
+}

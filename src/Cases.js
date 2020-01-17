@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from './Card'
+import axios from 'axios';
 
 export class Cases extends React.Component {
     constructor() {
@@ -14,12 +15,14 @@ export class Cases extends React.Component {
     
 
     async loadCases() {
-        const response = await fetch(`http://145.24.222.215:8000/cases`)
-        if (!response){
-            console.log('API not responding.')
-        } 
-        const json = await response.json()
-        this.setState({cases: json.items});
+        axios.get(`http://145.24.222.215:8000/cases`)
+            .then(res =>{
+                const response = res.data;
+                if (!response){
+                    console.log('API not responding.')
+                } 
+                this.setState({cases: response.items});
+            })          
     } 
 
     render() {
