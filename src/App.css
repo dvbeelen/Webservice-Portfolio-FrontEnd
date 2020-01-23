@@ -22,3 +22,9 @@
 .card {
   padding: 15px;
 }
+
+.caseDetails{
+  max-width: 25%;
+  margin: 0 auto;
+  background-color: wheat;
+}

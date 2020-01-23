@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Postform from './Postform';
 
 export class Card extends React.Component {
     constructor(props){
@@ -13,7 +14,13 @@ export class Card extends React.Component {
         this.setState({
           _showDetails: bool
         });
-      }
+    }
+    
+    _showEdit= (bool) => {
+        this.setState({
+          _showEdit: bool
+        });
+    }
 
     deleteCase(id){
         if (window.confirm('Are you sure you want to delete this case?')) {
@@ -50,25 +57,29 @@ export class Card extends React.Component {
                     Client: {this.state.clientName}
                 </div>
                 <div>
-                    <button><a href={'http://localhost:3000/' + this.state.id}>Read more </a></button>
-                    <button onClick={this._showDetails.bind(null, true)}>Show details</button>
-                    <button onClick={() => {this.deleteCase(this.state.id)}}>Delete Case</button>
+                    <button onClick={this._showEdit.bind(null, true)}>Edit this case</button>      
+                    <button onClick={this._showDetails.bind(null, true)}>Show the details</button>
+                    <button onClick={() => {this.deleteCase(this.state.id)}}>Delete this case</button>
                         { this.state._showDetails && (
                             <div class="caseDetails">
-                                <span>What is it called? {this.state.projectName} </span>
+                                <span><b>What is it called?</b> {this.state.projectName} </span>
                                 <br></br>
-                                <span>Who is it for? {this.state.clientName}</span>
+                                <span><b>Who is it for?</b> {this.state.clientName}</span>
                                 <br></br>
-                                <span>Give me a quick summary: {this.state.summary}</span>
+                                <span><b>Give me a quick summary:</b> {this.state.summary}</span>
                                 <br></br>
-                                <span>Give me the whole story: {this.state.description}</span>
+                                <span><b>Give me the whole story:</b> {this.state.description}</span>
                                 <br></br>
                                 <button onClick={this._showDetails.bind(null, false)}>Close this now!</button>
                             </div>
-                        ) }
-                    
-                </div>
-                
+                        ) }     
+                        { this.state._showEdit && (
+                            <div className="editForm">
+                                <Postform id={this.state.id} name={this.state.projectName}></Postform>
+                                <button onClick={this._showEdit.bind(null, false)}>Close this now!</button>
+                            </div>
+                         ) }                
+                </div>               
             </div>
         );
     }

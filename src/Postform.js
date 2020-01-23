@@ -30,7 +30,7 @@ export default class Postform extends React.Component {
   }
 
   handleSubmit = event => {
-    
+    console.log(this.props.id)
     let config = {
         headers: {
             'Content-Type': 'application/json'
@@ -46,51 +46,97 @@ export default class Postform extends React.Component {
 
     var json = JSON.stringify(data);
     console.log(json)
-
-    axios.post(`http://145.24.222.215:8000/cases`, json, config)
-      .then(res => {
-        if (res.status === 200){
-          console.log('POST Send.')
-        } else {
-          console.log('POST Not Send.')
-        }
-      })
-  }
-
-  render() {
     
-    return (
+    if(!this.props.id){
+      axios.post(`http://145.24.222.215:8000/cases`, json, config)
+        .then(res => {
+          if (res.status === 200){
+            console.log('POST Send.')
+          } else {
+            console.log('POST Not Send.')
+          }
+      })
+    }
+    else{
+      axios.put(`http://145.24.222.215:8000/cases/${this.props.id}`, json, config)
+        .then(res => {
+          if (res.status === 200){
 
-      <div>
-        <h2> Add a new Case</h2>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Project Name:
-            <input type="text" name="projectName" value={this.state.value} onChange={this.handleProjectNameChange} />
-          </label>
-          <br></br>
-
-          <label>
-            Client Name:
-            <input type="text" name="clientName" value={this.state.value} onChange={this.handleClientNameChange} />
-          </label>
-          <br></br>
-
-          <label>
-            Summary:
-            <input type="text" name="summary"  value={this.state.value} onChange={this.handleSummaryNameChange} />
-          </label>
-          <br></br>
-
-          <label>
-            Description:
-            <input type="text" name="description" value={this.state.value} onChange={this.handleDescriptionChange} />
-          </label>
-          <br></br>
-
-          <button type="submit">Add</button>
-        </form>
-      </div>
-    )
-  }
+            console.log('POST Send.')
+          } else {
+            console.log('POST Not Send.')
+          }
+        })
+      }
+    }
+  
+  render() {
+    if(!this.props.id){
+      return (
+        <div>
+          <h2> Add a new Case</h2>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Project Name:
+              <input type="text" name="projectName" value={this.state.value} onChange={this.handleProjectNameChange} />
+            </label>
+            <br></br>
+  
+            <label>
+              Client Name:
+              <input type="text" name="clientName" value={this.state.value} onChange={this.handleClientNameChange} />
+            </label>
+            <br></br>
+  
+            <label>
+              Summary:
+              <input type="text" name="summary"  value={this.state.value} onChange={this.handleSummaryNameChange} />
+            </label>
+            <br></br>
+  
+            <label>
+              Description:
+              <input type="text" name="description" value={this.state.value} onChange={this.handleDescriptionChange} />
+            </label>
+            <br></br>
+  
+            <button type="submit">Add</button>
+          </form>
+        </div>
+      )
+    } else{ 
+      return (
+        <div>
+          <h2> Update this case: {this.props.projectName}</h2>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Improved Project Name:
+              <input type="text" name="projectName" value={this.state.value} onChange={this.handleProjectNameChange} />
+            </label>
+            <br></br>
+  
+            <label>
+              Improved Client Name:
+              <input type="text" name="clientName" value={this.state.value} onChange={this.handleClientNameChange} />
+            </label>
+            <br></br>
+  
+            <label>
+              Improved Summary:
+              <input type="text" name="summary"  value={this.state.value} onChange={this.handleSummaryNameChange} />
+            </label>
+            <br></br>
+  
+            <label>
+              Improved Description:
+              <input type="text" name="description" value={this.state.value} onChange={this.handleDescriptionChange} />
+            </label>
+            <br></br>
+  
+            <button type="submit">Add</button>
+          </form>
+        </div>
+      )
+    }
+  }  
 }
