@@ -19,7 +19,7 @@ export default class Postform extends React.Component {
   }
 
   handleSubmit = event => {
-    event.preventDefault();
+   
 
     let config = {
         headers: {
@@ -50,8 +50,11 @@ export default class Postform extends React.Component {
   }
 
   render() {
+    
     return (
+      
       <div>
+        <h2> Add a new Case</h2>
         <form onSubmit={this.handleSubmit}>
           <label>
             Project Name:

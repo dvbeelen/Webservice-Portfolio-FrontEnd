@@ -25,6 +25,7 @@ export class Cases extends React.Component {
             })          
     } 
 
+
     render() {
         let thumbs = this.state.cases.map((singleCase, i) =>
             <Card key={i} name={singleCase.projectName} url={singleCase._links.self.href}></Card>
