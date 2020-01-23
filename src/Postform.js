@@ -19,8 +19,6 @@ export default class Postform extends React.Component {
   }
 
   handleSubmit = event => {
-   
-
     let config = {
         headers: {
             'Content-Type': 'application/json'
@@ -39,9 +37,7 @@ export default class Postform extends React.Component {
 
     axios.post(`http://145.24.222.215:8000/cases`, json, config)
       .then(res => {
-        console.log(res);
-        console.log(res.data);
-        if (res.status !== 400){
+        if (res.status === 200){
           console.log('POST Send.')
         } else {
           console.log('POST Not Send.')
@@ -52,7 +48,7 @@ export default class Postform extends React.Component {
   render() {
     
     return (
-      
+
       <div>
         <h2> Add a new Case</h2>
         <form onSubmit={this.handleSubmit}>

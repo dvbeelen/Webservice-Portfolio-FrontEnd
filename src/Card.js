@@ -10,8 +10,14 @@ export class Card extends React.Component {
     }
 
     deleteCase(id){
-        axios.delete(`http://145.24.222.215:8000/cases/${id}`)
-        console.log('Case removed.')
+        if (window.confirm('Are you sure you want to delete this case')) {
+            axios.delete(`http://145.24.222.215:8000/cases/${id}`)
+            console.log('Case removed.')
+            window.location = window.location.href
+        } else {
+            console.log('Case not removed.')
+        }
+       
     }
     componentDidMount() {
       this.loadDetails()
@@ -40,8 +46,8 @@ export class Card extends React.Component {
                     Client: {this.state.clientName}
                 </div>
                 <div>
-                    <button><a href={this.state.link}>Read more </a></button>
-                    <button>Edit Case</button>
+                    <button><a href={'http://localhost:3000/' + this.state.id}>Read more </a></button>
+                    <button><a href={'http://localhost:3000/' + this.state.id}> Edit Case </a></button>
                     <button onClick={() => {this.deleteCase(this.state.id)}}>Delete Case</button>
                 </div>
                 
