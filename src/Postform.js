@@ -9,16 +9,28 @@ export default class Postform extends React.Component {
     description: '',
   }
 
-  handleChange = event => {
-    this.setState({ 
-        projectName: event.target.value,
-        clientName: event.target.value,
-        summary: event.target.value,
-        description: event.target.value,
+  handleProjectNameChange = e => {
+    this.setState({ projectName: e.target.value,
+    });
+  }
+
+  handleClientNameChange = e => {
+    this.setState({ clientName: e.target.value,
+    });
+  }
+
+  handleSummaryNameChange = e => {
+    this.setState({ summary: e.target.value,
+    });
+  }
+
+  handleDescriptionChange = e => {
+    this.setState({ description: e.target.value,
     });
   }
 
   handleSubmit = event => {
+    
     let config = {
         headers: {
             'Content-Type': 'application/json'
@@ -54,25 +66,25 @@ export default class Postform extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Project Name:
-            <input type="text" name="projectName" onChange={this.handleChange} />
+            <input type="text" name="projectName" value={this.state.value} onChange={this.handleProjectNameChange} />
           </label>
           <br></br>
 
           <label>
             Client Name:
-            <input type="text" name="clientName" onChange={this.handleChange} />
+            <input type="text" name="clientName" value={this.state.value} onChange={this.handleClientNameChange} />
           </label>
           <br></br>
 
           <label>
             Summary:
-            <input type="text" name="summary" onChange={this.handleChange} />
+            <input type="text" name="summary"  value={this.state.value} onChange={this.handleSummaryNameChange} />
           </label>
           <br></br>
 
           <label>
             Description:
-            <input type="text" name="description" onChange={this.handleChange} />
+            <input type="text" name="description" value={this.state.value} onChange={this.handleDescriptionChange} />
           </label>
           <br></br>
 
