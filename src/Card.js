@@ -76,7 +76,7 @@ export class Card extends React.Component {
                         { this.state._showEdit && (
                             <div className="editForm">
                                 <Postform id={this.state.id} name={this.state.projectName}></Postform>
-                                <button onClick={this._showEdit.bind(null, false)}>Close this now!</button>
+                                <button onClick={this._showEdit.bind(null, false)}>On second thougt, let's not change it.</button>
                             </div>
                          ) }                
                 </div>               

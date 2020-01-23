@@ -29,6 +29,7 @@ export class Cases extends React.Component {
                     console.log('API not responding.')
                 } 
                 this.setState({cases: response.items});
+                console.log('Cases loaded.')
             })          
     } 
 
@@ -37,17 +38,32 @@ export class Cases extends React.Component {
             <Card key={i} name={singleCase.projectName} url={singleCase._links.self.href}></Card>
         )
 
-        return (
-            <div class="cases">
-                <div class="thumbnails">
-                    {thumbs}
+        if(!this.state.cases.length){
+            return(
+                <div className="noCasesMessage">
+                    <h1>Whoops, no dice!</h1>
+                    <p>The Cases-API failed to load the portfolio-cases. Maybe you forgot to turn the API on?</p>
                 </div>
-                <div class="formButton">
-                    <button onClick={this._showForm.bind(null, true)}>Add a brand new case</button>
-                    { this.state.showForm && (<Postform />) }
+            )
+        }
+
+        else{
+            return (
+                <div class="cases">
+                    <div class="thumbnails">
+                        {thumbs}
+                    </div>
+                    <div class="formButton">
+                        <button onClick={this._showForm.bind(null, true)}>Add a brand new case</button>
+                        { this.state.showForm && (
+                        <div className="addCase">
+                            <Postform />
+                            <button onClick={this._showForm.bind(null, false)}>Close this now!</button>
+                        </div>) }
+                    </div>
+                
                 </div>
-              
-            </div>
-        )   
+            )   
+        }
     }
 }
