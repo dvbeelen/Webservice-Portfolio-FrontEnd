@@ -6,9 +6,10 @@ export class Card extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            cases: [],
+            cases: []
         }
     }
+
 
     _showDetails = (bool) => {
         this.setState({
@@ -49,7 +50,7 @@ export class Card extends React.Component {
     }
 
     render() {
-        return (
+        return (      
             <div className="card">
                 <div><b>{this.state.projectName}</b></div>
                 <div>

@@ -6,11 +6,20 @@ import Postform from './Postform';
 export class Cases extends React.Component {
     constructor() {
         super()
-        this.state = { 
-            
-            cases: []
+        this.state = {        
+            cases: [],
+            currentPage: 1,
+            casesPerPage: 3
         }
+        this.handleClick = this.handleClick.bind(this);
     }
+
+    handleClick(event) {
+        this.setState({
+          currentPage: Number(event.target.id)
+        });
+      }
+
     _showForm = (bool) => {
         this.setState({
           showForm: bool
@@ -34,9 +43,32 @@ export class Cases extends React.Component {
     } 
 
     render() {
-        let thumbs = this.state.cases.map((singleCase, i) =>
+        const { cases, currentPage, casesPerPage } = this.state;
+
+        const indexOfLastCase = currentPage * casesPerPage;
+        const indexOfFirstCase = indexOfLastCase - casesPerPage;
+        const currentCases = cases.slice(indexOfFirstCase, indexOfLastCase);
+
+        let thumbs = currentCases.map((singleCase, i) =>
             <Card key={i} name={singleCase.projectName} url={singleCase._links.self.href}></Card>
         )
+
+        const pageNumbers = [];
+        for (let i = 1; i <= Math.ceil(cases.length / casesPerPage); i++) {
+          pageNumbers.push(i);
+        }
+
+        const renderPageNumbers = pageNumbers.map(number => {
+            return (
+              <li
+                key={number}
+                id={number}
+                onClick={this.handleClick}
+              >
+                {number}
+              </li>
+            );
+          });
 
         if(!this.state.cases.length){
             return(
@@ -61,7 +93,9 @@ export class Cases extends React.Component {
                             <button onClick={this._showForm.bind(null, false)}>Close this now!</button>
                         </div>) }
                     </div>
-                
+                    <ul id="page-numbers">
+                    {renderPageNumbers}
+                    </ul>
                 </div>
             )   
         }
