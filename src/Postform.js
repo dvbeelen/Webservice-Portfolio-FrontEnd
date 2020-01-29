@@ -107,30 +107,22 @@ export default class Postform extends React.Component {
     } else{ 
       return (
         <div>
-          <h2> Update this case: {this.props.projectName}</h2>
+          <h2> Update {this.props.caseName}: </h2>
           <form onSubmit={this.handleSubmit}>
-            <label>
-              Improved Project Name:
-              <input type="text" name="projectName" value={this.state.value} onChange={this.handleProjectNameChange} />
-            </label>
+            <label>Improved Project Name:</label><br></br>
+            <input type="text" name="projectName" value={this.state.value} onChange={this.handleProjectNameChange} />
             <br></br>
   
-            <label>
-              Improved Client Name:
-              <input type="text" name="clientName" value={this.state.value} onChange={this.handleClientNameChange} />
-            </label>
+            <label>Improved Client Name:</label> <br></br>
+            <input type="text" name="clientName" value={this.state.value} onChange={this.handleClientNameChange} />
             <br></br>
   
-            <label>
-              Improved Summary:
+            <label>Improved Summary: </label><br></br>
               <input type="text" name="summary"  value={this.state.value} onChange={this.handleSummaryNameChange} />
-            </label>
             <br></br>
   
-            <label>
-              Improved Description:
-              <input type="text" name="description" value={this.state.value} onChange={this.handleDescriptionChange} />
-            </label>
+            <label> Improved Description: </label><br></br>
+            <textarea rows="10" cols="70" name="description" value={this.state.value} onChange={this.handleDescriptionChange} />
             <br></br>
   
             <button type="submit">Add</button>

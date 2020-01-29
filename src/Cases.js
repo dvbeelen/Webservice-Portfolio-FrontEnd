@@ -10,11 +10,12 @@ export class Cases extends React.Component {
         this.state = {        
             cases: [],
             currentPage: 1,
-            casesPerPage: 3
+            casesPerPage: 3,
         }
         this.handleClick = this.handleClick.bind(this);
     }
 
+    
     handleClick(event) {
 
         this.setState({
@@ -56,7 +57,6 @@ export class Cases extends React.Component {
     }
     
     componentDidMount () {
-
         axios.get(`http://145.24.222.215:8000/cases`)
             .then(res =>{
 
@@ -73,7 +73,6 @@ export class Cases extends React.Component {
     }
 
     render() {
-
         const { cases, currentPage, casesPerPage } = this.state;
 
         const indexOfLastCase = currentPage * casesPerPage;
@@ -105,7 +104,6 @@ export class Cases extends React.Component {
 
 
                         return(
-
                             <div class={i._id}>
                                 <h4>{i.projectName}</h4>
                                 <span>{i.clientName}</span> <br></br>
@@ -113,7 +111,7 @@ export class Cases extends React.Component {
                                 <br></br>
                                 <div class="crudButtons">
                                     <Popup trigger={<button> Edit </button>} modal>
-                                        <Postform id = {i._id}/>
+                                        <Postform id = {i._id} caseName = {i.projectName}/>
                                     </Popup>
                                     <button onClick={() => {this.deleteCase(i._id)}}>Delete this case</button>
                                     <Details 

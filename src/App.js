@@ -7,7 +7,11 @@ import { Cases } from './Cases';
 export default class App extends React.Component {
     constructor(){
       super()
+      this.state ={
+        params : window.location.pathname
+      }
       console.log("App started")
+      console.log(this.state.params)
     }
     render(){
       return(
