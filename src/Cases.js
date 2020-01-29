@@ -10,7 +10,7 @@ export class Cases extends React.Component {
         this.state = {        
             cases: [],
             currentPage: 1,
-            casesPerPage: 3,
+            casesPerPage: 5,
         }
         this.handleClick = this.handleClick.bind(this);
     }
