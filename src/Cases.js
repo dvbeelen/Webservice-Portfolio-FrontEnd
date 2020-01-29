@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Postform from './Postform';
+import Details from './Details';
+import Popup from "reactjs-popup";
 
 export class Cases extends React.Component {
     constructor() {
@@ -99,10 +101,8 @@ export class Cases extends React.Component {
             <div className="cases">
 
                 <div className="thumbnails">
-                    {indexOfFirstCase} - {indexOfLastCase}
                     {currentCases.map( i => {
 
-                        console.log(i)
 
                         return(
 
@@ -112,9 +112,19 @@ export class Cases extends React.Component {
                                 <span>{i.summary}</span>
                                 <br></br>
                                 <div class="crudButtons">
+                                    <Popup trigger={<button> Edit </button>} modal>
+                                        <Postform id = {i._id}/>
+                                    </Popup>
                                     <button onClick={() => {this.deleteCase(i._id)}}>Delete this case</button>
+                                    <Details 
+                                        projectName={i.projectName} 
+                                        clientName={i.clientName} 
+                                        summary={i.summary} 
+                                        description={i.description} 
+                                    />
                                 </div>
-                            </div>              
+                            </div>  
+                                        
 
                          )
                      })}
