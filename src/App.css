@@ -28,3 +28,9 @@
   margin: 0 auto;
   background-color: wheat;
 }
+
+li {
+  list-style-type: none;
+  text-align: center;
+
+}

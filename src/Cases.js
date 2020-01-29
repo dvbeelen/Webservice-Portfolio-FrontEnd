@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card } from './Card'
 import axios from 'axios';
 import Postform from './Postform';
 
@@ -15,89 +14,138 @@ export class Cases extends React.Component {
     }
 
     handleClick(event) {
+
         this.setState({
           currentPage: Number(event.target.id)
         });
-      }
+        this.forceUpdate();
+
+    }
 
     _showForm = (bool) => {
+
         this.setState({
           showForm: bool
         });
-      }
-    
-    componentDidMount () {
-        this.loadCases();
+
+    }
+
+    _showDetails = (bool) => {
+        this.setState({
+          _showDetails: bool
+        });
     }
     
-    async loadCases() {
+    _showEdit= (bool) => {
+        this.setState({
+          _showEdit: bool
+        });
+    }
+
+    deleteCase(id){
+        if (window.confirm('Are you sure you want to delete this case?')) {
+            axios.delete(`http://145.24.222.215:8000/cases/${id}`)
+            console.log('Case removed.')
+            window.location = window.location.href
+        } else {
+            console.log('Case not removed.')
+        }
+       
+    }
+    
+    componentDidMount () {
+
         axios.get(`http://145.24.222.215:8000/cases`)
             .then(res =>{
+
                 const response = res.data;
-                if (!response){
-                    console.log('API not responding.')
-                } 
                 this.setState({cases: response.items});
-                console.log('Cases loaded.')
-            })          
-    } 
+
+            })
+            .catch(res => {
+
+                console.log('API not responding.');
+
+            })
+
+    }
 
     render() {
+
         const { cases, currentPage, casesPerPage } = this.state;
 
         const indexOfLastCase = currentPage * casesPerPage;
         const indexOfFirstCase = indexOfLastCase - casesPerPage;
-        const currentCases = cases.slice(indexOfFirstCase, indexOfLastCase);
-
-        let thumbs = currentCases.map((singleCase, i) =>
-            <Card key={i} name={singleCase.projectName} url={singleCase._links.self.href}></Card>
-        )
+        const currentCases = this.state.cases.slice(indexOfFirstCase, indexOfLastCase);
 
         const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(cases.length / casesPerPage); i++) {
+
           pageNumbers.push(i);
-        }
+
+        };
 
         const renderPageNumbers = pageNumbers.map(number => {
             return (
-              <li
-                key={number}
-                id={number}
-                onClick={this.handleClick}
-              >
+
+              <li key={number} id={number} onClick={this.handleClick}>
                 {number}
               </li>
+
             );
-          });
+        });
 
-        if(!this.state.cases.length){
-            return(
-                <div className="noCasesMessage">
-                    <h1>Whoops, no dice!</h1>
-                    <p>The Cases-API failed to load the portfolio-cases. Maybe you forgot to turn the API on?</p>
+        const displayCases = (
+            <div className="cases">
+
+                <div className="thumbnails">
+                    {indexOfFirstCase} - {indexOfLastCase}
+                    {currentCases.map( i => {
+
+                        console.log(i)
+
+                        return(
+
+                            <div class={i._id}>
+                                <h4>{i.projectName}</h4>
+                                <span>{i.clientName}</span> <br></br>
+                                <span>{i.summary}</span>
+                                <br></br>
+                                <div class="crudButtons">
+                                    <button onClick={() => {this.deleteCase(i._id)}}>Delete this case</button>
+                                </div>
+                            </div>              
+
+                         )
+                     })}
                 </div>
-            )
-        }
 
-        else{
-            return (
-                <div class="cases">
-                    <div class="thumbnails">
-                        {thumbs}
-                    </div>
-                    <div class="formButton">
-                        <button onClick={this._showForm.bind(null, true)}>Add a brand new case</button>
-                        { this.state.showForm && (
-                        <div className="addCase">
-                            <Postform />
-                            <button onClick={this._showForm.bind(null, false)}>Close this now!</button>
-                        </div>) }
-                    </div>
-                    <ul id="page-numbers">
+                <div className="formButton">
+                    <button onClick={this._showForm.bind(null, true)}>Add a brand new case</button>
+                    { this.state.showForm && (
+                    <div className="addCase">
+                        <Postform />
+                        <button onClick={this._showForm.bind(null, false)}>Close this now!</button>
+                    </div>) }
+                </div>
+
+                <ul id="page-numbers">
                     {renderPageNumbers}
-                    </ul>
-                </div>
-            )   
-        }
+                </ul>
+
+            </div>
+        );
+
+        const displayCasesEmpty = (
+            <div className="noCasesMessage">
+
+                <h1>Whoops, no dice!</h1>
+                <p>The Cases-API failed to load the portfolio-cases. Maybe you forgot to turn the API on?</p>
+
+            </div>
+        );
+        
+        return( this.state.cases.length ? displayCases : displayCasesEmpty ); 
+
     }
 }
