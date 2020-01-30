@@ -28,7 +28,6 @@ export class routeDetail extends React.Component{
 
     render() {
         if (this.state.cases){
-            console.log(this.state.cases)
         return ( 
             <Popup defaultOpen modal>
                    <div>
