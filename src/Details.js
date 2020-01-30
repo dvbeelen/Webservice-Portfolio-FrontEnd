@@ -6,9 +6,12 @@ import Popup from "reactjs-popup";
 export default class Details extends React.Component{
 
     render() {
+        console.log(this.props)
             return (
                 <Popup trigger={<button> Details </button>} modal>
                 <div>
+                    <p><b>Project ID:</b></p>
+                    {this.props.id} <br></br>
                     <p><b>Name of the project:</b></p>
                     {this.props.projectName} <br></br>
                     <p><b>The client I made this for:</b></p>

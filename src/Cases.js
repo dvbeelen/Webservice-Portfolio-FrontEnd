@@ -59,7 +59,6 @@ export class Cases extends React.Component {
     componentDidMount () {
         axios.get(`http://145.24.222.215:8000/cases`)
             .then(res =>{
-
                 const response = res.data;
                 this.setState({cases: response.items});
 
@@ -104,7 +103,7 @@ export class Cases extends React.Component {
 
 
                         return(
-                            <div class={i._id}>
+                            <div className="card">
                                 <h4>{i.projectName}</h4>
                                 <span>{i.clientName}</span> <br></br>
                                 <span>{i.summary}</span>
@@ -115,6 +114,7 @@ export class Cases extends React.Component {
                                     </Popup>
                                     <button onClick={() => {this.deleteCase(i._id)}}>Delete this case</button>
                                     <Details 
+                                        id = {i._id}
                                         projectName={i.projectName} 
                                         clientName={i.clientName} 
                                         summary={i.summary} 
