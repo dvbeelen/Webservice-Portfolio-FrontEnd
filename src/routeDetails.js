@@ -15,8 +15,8 @@ export class routeDetail extends React.Component{
         console.log(queryString)
         axios.get(queryString)
             .then(res =>{
-                const response = res.data;
-                this.setState({cases: response.items});
+                console.log(res.data)
+                this.setState({cases: res.data});
             })
             .catch(res => {
 
@@ -31,19 +31,28 @@ export class routeDetail extends React.Component{
             console.log(this.state.cases)
         return ( 
             <Popup defaultOpen modal>
-            <div class="routerDetails">
-                <p><b>Project ID:</b></p>
-                {this.state.cases._id} <br></br>
-                <p><b>Name of the project:</b></p>
-                {this.state.cases.projectName} <br></br>
-                <p><b>The client I made this for:</b></p>
-                {this.state.cases.clientName} <br></br>
-                <p><b>Short summary / Tagline :</b></p>
-                {this.state.cases.summary} <br></br>
-                <p><b>The complete story:</b></p>
-                {this.state.cases.description} <br></br>
-                <br></br>
-            </div>
+                   <div>
+                    <b>You Inserted Case Number:</b> 
+                    <br></br>
+                    {this.state.cases._id} 
+                    <br></br>
+                    <b>Name of the project:</b> 
+                    <br></br>
+                    {this.state.cases.projectName} 
+                    <br></br>
+                    <b>I made this for:</b> 
+                    <br></br>
+                    {this.state.cases.clientName} 
+                    <br></br>
+                    <b>Short summary / Tagline :</b> 
+                    <br></br>
+                    {this.state.cases.summary} 
+                    <br></br>
+                    <b>The complete story:</b> 
+                    <br></br>
+                    {this.state.cases.description} <br></br>
+                    <br></br>
+                </div>
             </Popup>
           )
 

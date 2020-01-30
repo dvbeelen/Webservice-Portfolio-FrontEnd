@@ -74,35 +74,28 @@ export default class Postform extends React.Component {
     if(!this.props.id){
       return (
         <div>
-          <h2> Add a new Case</h2>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Project Name:
-              <input type="text" name="projectName" value={this.state.value} onChange={this.handleProjectNameChange} />
-            </label>
-            <br></br>
-  
-            <label>
-              Client Name:
-              <input type="text" name="clientName" value={this.state.value} onChange={this.handleClientNameChange} />
-            </label>
-            <br></br>
-  
-            <label>
-              Summary:
-              <input type="text" name="summary"  value={this.state.value} onChange={this.handleSummaryNameChange} />
-            </label>
-            <br></br>
-  
-            <label>
-              Description:
-              <input type="text" name="description" value={this.state.value} onChange={this.handleDescriptionChange} />
-            </label>
-            <br></br>
-  
-            <button type="submit">Add</button>
-          </form>
-        </div>
+        <h2> Add a new Case </h2>
+        <form onSubmit={this.handleSubmit}>
+          <label>Project Name:</label><br></br>
+          <input type="text" name="projectName" value={this.state.value} onChange={this.handleProjectNameChange} />
+          <br></br>
+
+          <label>Client Name:</label> <br></br>
+          <input type="text" name="clientName" value={this.state.value} onChange={this.handleClientNameChange} />
+          <br></br>
+
+          <label>Summary: </label><br></br>
+            <input type="text" name="summary"  value={this.state.value} onChange={this.handleSummaryNameChange} />
+          <br></br>
+
+          <label>Description: </label><br></br>
+          <textarea rows="10" cols="70" name="description" value={this.state.value} onChange={this.handleDescriptionChange} />
+          <br></br>
+
+          <button type="submit">Add</button>
+        </form>
+        <br></br>
+      </div>
       )
     } else{ 
       return (

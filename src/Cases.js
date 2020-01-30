@@ -105,10 +105,9 @@ export class Cases extends React.Component {
                         return(
                             <div className="card">
                                 <h4>{i.projectName}</h4>
-                                <span>{i.clientName}</span> <br></br>
-                                <span>{i.summary}</span>
+                                <p className="flavourText">{i.summary}</p>
                                 <br></br>
-                                <div class="crudButtons">
+                                <div className="crudButtons">
                                     <Popup trigger={<button> Edit </button>} modal>
                                         <Postform id = {i._id} caseName = {i.projectName}/>
                                     </Popup>
@@ -121,13 +120,10 @@ export class Cases extends React.Component {
                                         description={i.description} 
                                     />
                                 </div>
-                            </div>  
-                                        
-
+                            </div>                
                          )
                      })}
                 </div>
-
                 <div className="formButton">
                     <button onClick={this._showForm.bind(null, true)}>Add a brand new case</button>
                     { this.state.showForm && (
@@ -137,8 +133,8 @@ export class Cases extends React.Component {
                     </div>) }
                 </div>
 
-                <ul id="page-numbers">
-                    {renderPageNumbers}
+                <ul className="pagination">
+                    <li> <a href="#">{renderPageNumbers}</a></li>
                 </ul>
 
             </div>

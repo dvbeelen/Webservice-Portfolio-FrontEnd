@@ -10,7 +10,7 @@ export class Header extends React.Component{
           <Helmet>
             <title>{ TITLE }</title>
           </Helmet>
-          <div>
+          <div class="header">
             <h2>Portfolio</h2>
           </div>
         </>
